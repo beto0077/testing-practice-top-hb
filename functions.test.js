@@ -54,7 +54,7 @@ test("Caesar Cipher Hello, World! and 3 to Khoor, Zruog!", () => {
   expect(caesarCipher("Hello, World!", 3)).toBe("Khoor, Zruog!");
 });
 // An analyzeArray function that takes an array of numbers and returns an object with the following properties: average, min, max, and length.
-test("analyzeArray takes [10, 20, 30, 40, 50] and return { average: 22.83, min: 8, max: 42, length: 6 }", () => {
+test("analyzeArray takes [10, 20, 30, 40, 50] and return { average: 30, min: 10, max: 50, length: 5 }", () => {
   expect(analyzeArray([10, 20, 30, 40, 50])).toEqual({
     average: 30,
     min: 10,
@@ -88,4 +88,68 @@ test("calculates averages with decimals", () => {
 });
 test("handles an empty array safely", () => {
   expect(analyzeArray([])).toBeNull();
+});
+// ===== Additional tests to improve coverage =====
+
+// capitalize
+test("Capitalize already-capitalized word stays the same", () => {
+  expect(capitalize("Dog")).toBe("Dog");
+});
+
+test("Capitalize empty string returns empty string", () => {
+  expect(capitalize("")).toBe("");
+});
+
+// reverseString
+test("Reverse empty string returns empty string", () => {
+  expect(reverseString("")).toBe("");
+});
+
+test("Reverse single character returns same character", () => {
+  expect(reverseString("a")).toBe("a");
+});
+
+test("Reverse string with spaces", () => {
+  expect(reverseString("ab cd")).toBe("dc ba");
+});
+
+// calculator
+test("Calculator divide by zero returns error message", () => {
+  expect(calculator.divide(10, 0)).toBe("Error: Cannot divide by 0");
+});
+
+test("Calculator handles negative multiplication", () => {
+  expect(calculator.multiply(-3, 4)).toBe(-12);
+});
+
+// caesarCipher
+test("Caesar Cipher with shift 0 returns same string", () => {
+  expect(caesarCipher("Hello, World!", 0)).toBe("Hello, World!");
+});
+
+test("Caesar Cipher handles negative shift", () => {
+  expect(caesarCipher("abc", -3)).toBe("xyz");
+});
+
+test("Caesar Cipher handles large shift values", () => {
+  expect(caesarCipher("abc", 29)).toBe("def"); // 29 === 3 mod 26
+});
+
+// analyzeArray
+test("analyzeArray handles decimal numbers", () => {
+  expect(analyzeArray([1.5, 2.5, 3.5])).toEqual({
+    average: 2.5,
+    min: 1.5,
+    max: 3.5,
+    length: 3,
+  });
+});
+
+test("analyzeArray handles all equal values", () => {
+  expect(analyzeArray([4, 4, 4, 4])).toEqual({
+    average: 4,
+    min: 4,
+    max: 4,
+    length: 4,
+  });
 });
